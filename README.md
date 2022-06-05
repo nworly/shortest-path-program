@@ -8,7 +8,8 @@
 |:--------:|:---------:|:---------:|:--------:| :-----: |
 |  human   |     5     |     2     |    3     |  1 |
 | swamper  |     2     |     2     |    5     |  2 |
-| woodman  |     3     |     3     |    2     |  2 |
+| woodman  |     3     |     3     |    2     |  2 |  
+
 *Информация о названиях существ и препятствий и стоимости перемещений считывается из файла **barrier-values-for-each-race.json**.*
 
 ### Устройство программы:
@@ -22,7 +23,7 @@
 * строка, содержащая расу существа
 
 ### Выходные данные:
-* минимальные затраты существа на перемещение из стартовой позиции (левый верхний угол) в конечную (правый нижний угол)
+* минимальные затраты существа на перемещение из стартовой позиции в конечную
 
 ### Пример:
 * Входные данные: 
@@ -32,3 +33,41 @@
     * `10`
 
 *Программа содержит Unit тесты.*
+
+---
+
+## This program is designed to find the minimum moving cost of a creature from its starting point to the final one in a matrix
+
+### Rules:
+* creature can move up/down or left/right
+* moving cost through cells depends on the type of cell and on the creature race according to the table:
+
+| race | S (swamp) | W (water) | T (tree) | P (plain) |
+|:--------:|:---------:|:---------:|:--------:| :-----: |
+| human | 5 | 2 | 3 | 1 |
+| swamper | 2 | 2 | 5 | 2 |
+| woodman | 3 | 3 | 2 | 2 |
+
+*Information about the creature types, obstacles and the moving costs is read from the file **barrier-values-for-each-race.json**.*
+
+### Program structure:
+* class `Solution` with a single public static method `getResult`
+* class `Algorithm`, describing the search for the shortest path on the field from the upper left corner to the lower right corner
+  * static class `Cell` describing cell parameters
+  * static method `getShortestPath` to find the shortest path (based on Dijkstra's algorithm)
+
+### Input:
+* a 16-character string describing the cells of the 4*4 playing field
+* a string containing the creature's race
+
+### Output:
+* the minimum moving cost from the starting position to the final position
+
+### Example:
+* Input data:
+    * `"STWSWTPPTPTTPWPP"`
+    * `"Human"`
+* Output:
+    * `10`
+
+*The program contains Unit tests.*
